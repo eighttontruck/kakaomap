@@ -1,4 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+  String mid = session.getAttribute("sId")==null ? "" : (String) session.getAttribute("sId");
+  if(mid.equals("")) {
+  	out.print("<script>");
+  	out.print("alert('잘못된 접근입니다.');");
+  	out.print("location.href='"+request.getContextPath()+"/source/login.jsp';");
+  	out.print("</script>");
+  }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +36,11 @@
             z-index:1;
             transition:all .35s;
         } 
+        #memberInfo{
+        	margin-top:11px;
+        	margin-left:60px;
+        	font-size:20px;
+        }
         /* input[id="menuicon"]:checked + label + div {
             right:0;
         } */
@@ -45,34 +59,31 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active ml-5 mt-1 h5" aria-current="page" href="#">전체보기</a>
+                <a class="nav-link active ml-5 mt-2 h5" aria-current="page" href="#">전체보기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-5 mt-1 h5" href="#">한식</a>
+                <a class="nav-link ml-5 mt-2 h5" href="#">한식</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-5 mt-1 h5" href="#">중식</a>
+                <a class="nav-link ml-5 mt-2 h5" href="#">중식</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-5 mt-1 h5" href="#">일식</a>
+                <a class="nav-link ml-5 mt-2 h5" href="#">일식</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-5 mt-1 h5" href="#">양식</a>
+                <a class="nav-link ml-5 mt-2 h5" href="#">양식</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-5 mt-1 h5" href="#">카페</a>
+                <a class="nav-link ml-5 mt-2 h5" href="#">카페</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-5 mt-1 h5" href="#">편의점</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link ml-5 mt-1 h5" href="#">점메추</a>
+                <a class="nav-link ml-5 mt-2 h5" href="#">편의점</a>
             </li>
             <li>
-            	<p>${mid} 님 반갑습니다.</p>
+            	<p id="memberInfo">${sId}님 반갑습니다.</p>
             </li>
             <li class="nav-item">
-                <button class="btn btn-success ml-5 mt-2" type="button">로그아웃</button>
+                <a href="<%=request.getContextPath()%>/logOut"class="btn btn-success ml-5 mt-2">로그아웃</a>
             </li>
             </ul>            
         </div>

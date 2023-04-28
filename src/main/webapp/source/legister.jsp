@@ -10,29 +10,97 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>회원가입</title>
-    <script>
+    <script> //정규식만 완성시키면 끝 
     	'use strict';
-    	function Check(){
-    		let mid=document.getElementById("mid").value.trim();
+    	let require="필수 정보 입니다.";
+    	let regexCheck="조건에 맞게 작성해주세요.";
+    	let pwdDouCheck="비밀번호와 일치하지 않습니다.";
+    	function idCheck(){
+			let id=document.getElementById("mid").value.trim();
+			const regex=;
+			
+			if(!regex.test(id)){
+				document.getElementById("hidP1").innerHTML=regexCheck;
+				document.getElementById("hidP1").style.display="block";
+			} 
+			
+    	}
+    	
+    	function pwdCheck(){
+			let pwd=document.getElementById("pwd").value.trim();
+			const regex=;
+			
+			if(!regex.test(id)){
+				document.getElementById("hidP2").innerHTML=regexCheck;
+				document.getElementById("hidP2").style.display="block";
+			} 
+    	}
+    	
+    	function pwd2Check(){
     		let pwd=document.getElementById("pwd").value.trim();
-    		if(mid==""&&pwd==""){
-    			alert("아이디와 비밀번호를 입력하세요.");
-    			return false;
-    		} else if(mid==""){
-    			alert("아이디를 입력하세요.");
-    			return false;
-    			myform.mid.focus();
-    		} else if(pwd==""){
-    			alert("비밀번호를 입력하세요.");
-    			myform.pwd.focus();
-    			return false;
+			let pwd2=document.getElementById("pwd2").value.trim();
+			const regex=;
+			
+			if(pwd==pwd2){
+				document.getElementById("hidP3").innerHTML=pwdDouCheck;
+				document.getElementById("hidP3").style.display="block";
+			} 
+    	}
+    	
+    	function nameCheck(){
+			let id=document.getElementById("name").value.trim();
+			const regex=;
+			
+			if(!regex.test(id)){
+				document.getElementById("hidP4").innerHTML=regexCheck;
+				document.getElementById("hidP4").style.display="block";
+			} 
+    	}
+    	
+    	function birthdayCheck(){
+			let id=document.getElementById("birthday").value.trim();
+			const regex=;
+			
+			if(!regex.test(id)){
+				document.getElementById("hidP5").innerHTML=regexCheck;
+				document.getElementById("hidP5").style.display="block";
+			} 
+    	}
+    	
+    	function genderCheck(){
+			let id=document.getElementById("gender").value.trim();
+			const regex=;
+			
+			if(!regex.test(id)){
+				document.getElementById("hidP6").innerHTML=regexCheck;
+				document.getElementById("hidP6").style.display="block";
+			} 
+    	}
+    	
+    	function blankCheck(){
+    		let id=document.getElementById("mid").value.trim();
+    		let pwd=document.getElementById("pwd").value.trim();
+    		let pwd2=document.getElementById("pwd2").value.trim();
+    		let name=document.getElementById("name").value.trim();
+    		let birthday=document.getElementById("birthday").value.trim();
+    		let gender=document.getElementById("gender").value.trim();
+    		
+    		
+    		if(id=="") document.getElementById("hidP1").style.display="block";
+    		if(pwd=="") document.getElementById("hidP2").style.display="block";
+    		if(pwd2=="") document.getElementById("hidP3").style.display="block";
+    		if(name=="") document.getElementById("hidP4").style.display="block";
+    		if(birthday=="") document.getElementById("hidP5").style.display="block";
+    		if(gender=="") document.getElementById("hidP6").style.display="block";
+    		
+    		if(id!=""&&pwd!=""&&pwd2!=""&&name!=""&&birthday!=""&&gender!=""){
+    			myform.submit();
     		}
-    		myform.submit();
     	}
     </script>
     <style>
     	body{
-    		background-color:magenta;
+    		background-color:#FDEBC8;
     	}
     	#login{
     		background-color:white;
@@ -70,41 +138,52 @@
 		#a{
 			padding-top:100px;
 		}
+		.hiddentext{
+			text-align:left;
+			color:red;
+			margin-left:10px;
+			display:none;
+		}
     </style>
 </head>
 <body>
     <div class="container text-center" id="login">
         <div>
-            <form action="<%=request.getContextPath()%>/loginOk" name="myform" method="post" >
+            <form action="<%=request.getContextPath()%>/LegisterOk" name="myform" method="post" >
 	            <div id="a">
 	            	<div class="rows label id">아이디</div>
 	            	<div class="rows"><input type="text" class="form-control" value="" id="mid" name="mid" placeholder="아이디를 입력하세요" autofocus></div>
+	            	<div class="rows"><p class="hiddentext" id="hidP1">필수 정보입니다.</p></div>
 	               	<div class="rows mt-2 label">비밀번호</div>
 	               	<div class="rows"><input type="password" class="form-control" value="" id="pwd" name="pwd" placeholder="비밀번호를 입력하세요" autofocus></div>
+	               	<div class="rows"><p class="hiddentext" id="hidP2">필수 정보입니다.</p></div>
 	               	<div class="rows mt-2 label">비밀번호 확인</div>
 	               	<div class="rows"><input type="password" class="form-control" value="" id="pwd_check" name="pwd_check" placeholder="비밀번호 한번 더 입력하세요" autofocus></div>
+	               	<div class="rows"><p class="hiddentext" id="hidP3">필수 정보입니다.</p></div>
 	            	<div class="rows mt-2 label">이름</div>
 	               	<div class="rows"><input type="text" class="form-control" value="" id="name" name="name" placeholder="이름을 입력하세요" autofocus></div>
+	               	<div class="rows"><p class="hiddentext" id="hidP4">필수 정보입니다.</p></div>
 	            	<div class="rows mt-2 label">생년월일</div>
 	               	<div class="rows">
 	               		<input type="text" class="form-control birthday birthday" value="" id="since" name="since" placeholder="년(4자)" autofocus>
 	               		<select class="form-control birthday" id="month" name="month">
 	               			<option value="">월</option>
-	               			<option value="">1월</option>
-	               			<option value="">2월</option>
-	               			<option value="">3월</option>
-	               			<option value="">4월</option>
-	               			<option value="">5월</option>
-	               			<option value="">6월</option>
-	               			<option value="">7월</option>
-	               			<option value="">8월</option>
-	               			<option value="">9월</option>
-	               			<option value="">10월</option>
-	               			<option value="">11월</option>
-	               			<option value="">12월</option>
+	               			<option>1월</option>
+	               			<option>2월</option>
+	               			<option>3월</option>
+	               			<option>4월</option>
+	               			<option>5월</option>
+	               			<option>6월</option>
+	               			<option>7월</option>
+	               			<option>8월</option>
+	               			<option>9월</option>
+	               			<option>10월</option>
+	               			<option>11월</option>
+	               			<option>12월</option>
 	               		</select>
 	               		<input type="text" class="form-control birthday" value="" id="day" name="day" placeholder="" autofocus>
 	               	</div>
+	               	<div class="rows"><p class="hiddentext" id="hidP5">필수 정보입니다.</p></div>
 	               	<div class="rows label" id="gender">성별</div>
 	               	<div class="rows">
 	               		<select class="form-control">
@@ -114,7 +193,8 @@
 	               			<option value="">선택안함</option>
 	               		</select>
 	               	</div>
-	                <div class="rows"><input type="button" value="회원가입" onclick="Check()" class="btn btn-success pl-4 pr-4 mt-4"></div>
+	               	<div class="rows"><p class="hiddentext" id="hidP6">필수 정보입니다.</p></div>
+	                <div class="rows"><input type="submit" value="회원가입" class="btn btn-success pl-4 pr-4 mt-4"></div> <!-- onclick="blankCheck()" -->
 	            </div>
             </form>
         </div>
